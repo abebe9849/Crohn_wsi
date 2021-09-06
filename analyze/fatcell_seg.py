@@ -57,15 +57,17 @@ def img_and(mask,canny):
     
     new_img = np.logical_and(canny,mask)
     return new_img
-    
+
+"""
 def sharpen_image(img,k):
     #kernel = np.array([[-k / 9, -k / 9, -k / 9],[-k / 9, 1 + 8 * k / 9, k / 9],[-k / 9, -k / 9, -k / 9]], np.float32)
     kernel = np.array([[-1,-1,-1], [-1,9,-1], [-1,-1,-1]], np.float32) 
     new_img = cv2.filter2D(img, -1, kernel).astype("uint8")
     #new_img2 = cv2.filter2D(new_img, -1, kernel).astype("uint8")
     return new_img
+"""
 
-
+"""
 def each_cell(markers,thresh=0.03,plot=True):
     u, counts = np.unique(markers.ravel(), return_counts=True)
     areas = []
@@ -99,7 +101,7 @@ def each_cell(markers,thresh=0.03,plot=True):
     back_area = counts[2]
     #print(back_area)
     return emp,areas,back_area,margin_num
-
+"""
 def margin_to_black(markers,color_img,gray_img,distant=None,p=0.1,thresh = 0.03,thresh_margin=0.05,plot=False):
     u, counts = np.unique(markers.ravel(), return_counts=True)
 
@@ -224,6 +226,7 @@ def analyze_data(areas,backs,figname,distants=None,ellipses_rates=None):
     with open(f"{figname}_nums.pickle", 'wb') as f:
         pickle.dump(nums, f)
 
+"""
 def compare_data(areas1,backs1,areas2,backs2,distant=None,ellipses_rate=None,figname=None):
     nums1 = [len(area) for area in areas1]
     nums2 = [len(area) for area in areas2]
@@ -270,11 +273,12 @@ def compare_data(areas1,backs1,areas2,backs2,distant=None,ellipses_rate=None,fig
         plt.hist(np.array(ellipses_rate_f1),bins=100)
         plt.hist(np.array(ellipses_rate_f2),bins=100)
         plt.savefig(f"{figname}_ellipses_rate.png")
-
+"""
 
 
     
 import pickle
+"""
 def calc_analyze(df_tmp,label,num):
     areas_ = []
     backgrounds_ = []
@@ -318,7 +322,7 @@ def calc_analyze(df_tmp,label,num):
         #plt.show()
         
     return areas_,backgrounds_
-
+"""
 def each_cell_vori(markers,thresh=0.03,plot=True):
     u, counts = np.unique(markers.ravel(), return_counts=True)
     areas = []
@@ -614,7 +618,7 @@ def calc_analyze_plus(df_tmp,label,num):
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
         retval, mask = cv2.threshold(gray, thresh=gray.mean(0).mean(0), maxval=255, type=cv2.THRESH_BINARY)
         markers = water_shed(mask,img)
-        #new_markers,areas,back_area,margin_num = each_cell(markers,plot=False)#こちらのほうがきれいにとれる
+        #new_markers,areas,back_area,margin_num = each_cell(markers,plot=False)
         new_markers,areas,back_area,margin_num,norms,ellipses_rate = each_cell_vori(markers,plot=False)
         if len(areas)<20:##len(areas)<20のものはなにか問題ある(余白が半分以上、他の組織、ぼやけてる)
             gray_3 = cv2.Canny(gray,0,30)
@@ -675,6 +679,7 @@ areas1,backgrounds1,distants1,ellipses_rates1 = calc_analyze_plus(predcit,0,len(
 analyze_data(areas1,backgrounds1,figname=f"{date}/analyze/pred_n_re",distants=distants1,ellipses_rates=ellipses_rates1)
 sys.exit()
 
+"""
 areas1,backgrounds1,distants1,ellipses_rates1 = calc_analyze_plus(predcit,1,4000)
 analyze_data(areas1,backgrounds1,figname=f"{date}/analyze/pred_1",dstants=distants1,ellipses_rates=ellipses_rates1)
 
@@ -691,3 +696,4 @@ areas0,backgrounds0 = calc_analyze(predcit,0,2000)
 analyze_data(areas0,backgrounds0,figname=f"{date}/analyze/pred_0")
 
 compare_data(areas1,backgrounds1,areas0,backgrounds0,distant=None,ellipses_rate=None,figname=f"{date}/analyze//compare")
+"""
