@@ -1,0 +1,56 @@
+##/home/u094724e/ダウンロード/byori/cam/outputs/2021-04-10/06-33-22/.hydra/config.yaml
+
+general:
+  debug: false
+  exp_num: 203
+  device: 0
+  task:
+    name: clf_withcam
+  exp_type: 5
+  precrop: true
+loss:
+  name: ce
+  weights: 0
+  smooth_a: 0
+  metric_learn: false
+  focal_gamma: 0
+preprocess:
+  size: 128
+augmentation:
+  augmix_s: 10
+  augmix_p: 0.5
+  grdimask_p: 0.5
+  grdimask_n: 3
+  hflip_p: 0.5
+  vflip_p: 0.5
+  cutout_p: 0.5
+  cutout_h: 8
+  cutout_w: 8
+  contrast_p: 0.2
+  bright_contrast_p: 0
+  rotate_90_p: 0.5
+  bright_p: 0
+  do_mixup: false
+  do_fmix: false
+  do_cutmix: false
+  do_snapmix: false
+  mix_p: 0
+  mix_alpha: 1
+model:
+  name: tf_efficientnet_b5_ns
+  type: cnn
+  pooling: gem
+  n_classes: 2
+tta:
+  do: false
+train:
+  amp: true
+  amp_inf: false
+  optim: adam
+  lr: 0.001
+  epochs: 5
+  batch_size: 128
+  scheduler:
+    name: cosine
+    min_lr: 1.0e-05
+    t_0: 3
