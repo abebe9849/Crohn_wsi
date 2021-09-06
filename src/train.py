@@ -488,7 +488,7 @@ def submit(test,CFG):
         return probs#,features
 
 log = logging.getLogger(__name__)
-CONFIG_path='config/tile_conf.yaml'
+CONFIG_path='config/exp_203.yaml'
 @hydra.main(config_path=CONFIG_path)
 def main(CFG : DictConfig) -> None:
     #CFG = OmegaConf.to_yaml(cfg)
